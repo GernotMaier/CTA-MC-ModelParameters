@@ -1,8 +1,30 @@
 \section{Introduction}
 
-This document describes in details the MC model parameters, the corresponding workflows for setting and validating them, and the procedures to calculate the corresponding systematic uncertainties.
+This document describes the CTA MC model parameters, the corresponding workflows for setting and validating them, and the procedures to calculate the corresponding systematic uncertainties.
 
 This document is part of a series describing the CTA MC Simulation Pipeline. 
 It is expected that the reader is familiar with the wider concept of \simsys as described in  \cite{CTAConcept}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Glossary}
+
+Useful definitions helpful for this document are listed below.
+We point also to the glossary definitions in Jama and those in  \cite{CTAConcept}.
+
+\begin{description}
+
+\item[Reference simulation model:] 
+Simulation model defined as reference for comparisons with newly introduced model parameters.
+
+\item[Reference simulation production: ]
+Simulation production based on reference simulation model. 
+
+\item[Reference Instrument Response Functions: ]  
+Set of instrument response functions (IRFs) calculated from the reference simulation production used for comparisons with IRFs derived from a simulation production with an altered simulation model.
+Typical instrument response functions are effective areas, reconstructed energy, and gamma-ray point-spread function.
+\TODO{MG lists also pointing accuracy; understand}
+
+\end{description}
 
 
