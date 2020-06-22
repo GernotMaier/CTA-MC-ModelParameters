@@ -1,0 +1,226 @@
+% Author: G.Maier
+%
+%
+
+\documentclass[short]{ctappp}
+
+\usepackage{eurosym}	
+\usepackage{nicefrac}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{lineno}
+\usepackage{etoolbox}
+
+\usepackage{longtable} % table longer than one page
+\usepackage{tabularx}
+\usepackage{booktabs} % toprule, etc.
+\usepackage{rotating}
+\usepackage{makecell}
+%\usepackage[normalem]{ulem}
+
+\usepackage{geometry}
+\usepackage{pdflscape}
+\usepackage{lscape}
+\usepackage{fancyhdr}
+\usepackage[absolute]{textpos}
+\usepackage{xspace}
+\usepackage{marginnote}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{glossaries}
+\makenoidxglossaries
+ % use \todo{comment} for remarks in margins, or \todo[inline]{remark} for
+% inline comments (include your name if you like) 
+%
+% mark changes in the draft
+%for newly added text:
+%\added[id=<id>, comment=<comment>]{new text}
+%for deleted text:
+%\deleted[id=<id>, comment=<comment>]{old text}
+%for replaced text:
+%\replaced[id=<id>, comment=<comment>]{hnew texti}{hold texti}
+% add option [final] to remove the listing of all changes
+%\usepackage[final]{changes}
+\usepackage[commentmarkup=todo]{changes}
+\definechangesauthor[color=orange]{GM}
+\definechangesauthor[color=blue]{OG}
+\definechangesauthor[color=teal]{MC}
+
+
+%\extrafloats{100}  % allocate skeletons for a large number of floats
+\fancypagestyle{lscape}{% 
+\fancyhf{} % clear all header and footer fields 
+\fancyfoot[LE]{%
+\begin{textblock}{20}(1,5){\rotatebox{90}{\leftmark}}\end{textblock}
+\begin{textblock}{1}(13,10.5){\rotatebox{90}{\thepage}}\end{textblock}}
+\fancyfoot[LO] {%
+\begin{textblock}{1}(13,10.5){\rotatebox{90}{\thepage}}\end{textblock}
+\begin{textblock}{20}(1,13.25){\rotatebox{90}{\rightmark}}\end{textblock}}
+\renewcommand{\headrulewidth}{0pt} 
+\renewcommand{\footrulewidth}{0pt}}
+\interfootnotelinepenalty=10000
+
+\setlength{\TPHorizModule}{1cm}
+\setlength{\TPVertModule}{1cm}
+
+\patchcmd{\thebibliography}{\section*}{\section}{}{}
+
+\graphicspath{{./figures/}} 
+
+\newcommand{\TODO}[1]{\todo[color=red,backgroundcolor=white,inline]{{{\tiny Comment:} \texttt{#1}}}}
+\newcommand{\TODOI}[1]{\todo[color=red,inline]{{{\tiny TODO:} \texttt{#1}}}}
+\newcommand{\TODODONE}[1]{\todo[color=green,inline]{{{\tiny DONE:} \texttt{#1}}}}
+
+
+\newcommand{\arxiv}[1]{[\texttt{\href{https://arxiv.org/abs/#1}{arXiv:#1}}]}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CTA terminology definitions (to make it easier to change, which happens often)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \Simsys {Simulation Pipelines System\xspace}
+\def \simsys {Simulation Pipelines System\xspace} % FIXME - this should be simpipe, but it requires changing sentences throughout the document, think if necessary.
+\def \simpipe {SimPipe\xspace}
+\def \Datasys {Data Processing Pipelines System\xspace}
+\def \datasys {DataPipe\xspace}
+\def \Calibsys {Calibration Pipelines System\xspace}
+\def \calibsys {CalibPipe\xspace}
+\def \Calibdb {Calibration Database\xspace}
+\def \Workloadsys {Workload Management System\xspace}
+\def \workloadsys {Workload\xspace}
+\def \Bulksys {Bulk Archive Management System\xspace}
+\def \bulksys {BulkArchive\xspace}
+\def \st {sim\_telarray}
+
+\input{cta-glossary-defs.inc}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Add document information for the current version 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% UPDATE TO YOUR VARIABLES %%%%
+
+\title{Simulation Model Parameters  \\ Description and Workflows \\ {\small \today}\\ [10pt]}
+\shorttitle{Simulation Model parameters}
+\version{0.1}
+\revision{a}
+\acronym{}
+\editor{G.Maier (DESY)}            % a single editor of the document only, or reference to an author list in an appendix
+\DocComment{}
+%\ownership{CTAO}
+%\distribution{S. Schlenstedt}
+%\approvedby{K. Kosack}
+\authors{G. Maier (DESY), ...}
+%\keywords{Simulations, MC Model}
+
+\history{
+% Version & Revision & Date % Comment & Parts affected \\
+0.1 & a & 2020-06-15 & Start of Document &   \\ \hline
+}
+
+
+%%%%% DONT CHANGE ! %%%%%%%%%%%%%%%%
+\maketitle
+%\FloatBarrier\if@openright\cleardoublepage\else\clearpage\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% DONT CHANGE ! %%%%%%%%%%%
+\maketoc
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{Introduction}
+\include{Modelparameters}
+\include{Setting}
+\include{Validation}
+\include{Systematics}
+\include{Temporary}
+
+%\include{sections/Assumptions}
+%\include{sections/Glossary}
+%\include{sections/Actors}
+%\include{sections/Requirements}
+%\include{sections/UseCases}
+
+
+
+\thispagestyle{fancy}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\cleardoublepage
+
+%%%%% DONT CHANGE ! %%%%%%%%%%%%%%%
+%\cleardoublepage
+%\normalsize\small\footnotesize\scriptsize
+%\addcontentsline{toc}{section}{References}
+%\bibliographystyle{bibgen}
+
+\bibliographystyle{alpha}
+\begin{thebibliography}{}
+
+\bibitem{CTAConcept}
+Concept for the CTA Simulation Pipelines System Software, 
+CTA-TRE-COM-304000-0003.1b;
+June 2020
+
+%\bibitem{CTAMC}
+%\href{https://jama.cta-observatory.org/perspective.req#/items/31225?projectId=11}{The Standard Monte Carlo Simulation Framework for CTA (CTA-PRO-SCI-00000-0001; Sept 2018)}
+%
+%\bibitem{CTAdataModel} 
+%\href{https://jama.cta-observatory.org/perspective.req#/items/26528?projectId=6}{CTA Top-Level Data Model v1.0 (in preparation), CTA-SPE-OSO-000000-0001.}
+%
+%\bibitem{CTATLUseCases}
+%\href{https://jama.cta-observatory.org/perspective.req#/items/29414?projectId=11}{CTA Top Level Uses Cases (Dec 2017).}
+
+\bibitem{CTADPPSrequirements}
+\href{https://jama.cta-observatory.org/perspective.req#/containers/26376?projectId=11}{DPPS Requirements (2018)}
+
+%\bibitem{CTAArchitecture}
+% \href{https://jama.cta-observatory.org/perspective.req#/items/30187?projectId=11}{CTA Architecture (April 2018).}
+%
+%\bibitem{CTAMCRequirements}
+%\href{https://portal.cta-observatory.org/WG/DM/DATA%20local%20library/Software%20Requirements%20documents/MC-Requirements-v2.1.pdf}{MC Simulation Software Requirements (Oct 2014; partially outdated).}
+%
+%\bibitem{Bernloehr:2008} 
+%\href{https://arxiv.org/abs/0808.2253}{Bernl\"ohr, K., Astroparticle Physics 30, 149 (2008).}
+%
+%\bibitem{Bernloehr:2000}
+%Bernl\"ohr, K., Astroparticle Physics 12, 255 (2000).
+%
+%% add S.Ohm computing requirements document?
+%\bibitem{Ohm:2015}
+%\href{https://forge.in2p3.fr/projects/cta_analysis-and-simulations/repository/changes/Simulations/MCComputingNeeds/MC-computing-needs.pdf}{Ohm, S., Monte-Carlo computing requirements for high-level analysis, (2015)}
+
+\end{thebibliography}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%----- Glossary -----%%%
+\normalsize
+%\clearpage
+%\printacronyms
+\printnoidxglossaries
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Print the References   -   USES BibTeX: UPDATE TO SHOW YOUR .BIB FILES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% print list of changes
+%\listofchanges[style=list]
+
+%%%%% DONT CHANGE ! %%%%%%%%%%%%%
+%\markboth{}{References}
+%\cleardoublepage
+%\normalsize
+%\glsaddall
+%\printglossaries
+%\markboth{}{Glossary}
+%
+
+%\listoftodos
+%\todototoc
+
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
