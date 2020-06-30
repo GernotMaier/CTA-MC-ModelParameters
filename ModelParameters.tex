@@ -1,33 +1,87 @@
 \section{Model parameter description}
 
-\subsection{Molecular profiles}
+\subsection{Introduction}
+
+The simulation model parameter descriptions below consists of several parts, described here in detail:
+
+\textbf{MC model parameter:} \textit{Descriptive name of model parameter}
+
+\textbf{Description:} \textit{short description of model parameter; allows to understand its functionality}
+
+\textbf{Format and units:} \textit{precise description of expected data formats and units}
+
+\textbf{Required accuracy:} \textit{Guidance on expected accuracy (e.g., the sampling speed of the readout system might be given exactly, while other values are expected to be given to 1\% accuracy)}
+\TODO{Discuss this: overlap with calibration and data provided by the instrument systems}
+
+\textbf{Setting procedure:}
+Short description and list of relevant setting / derivation groups
+
+\textbf{Validation groups:} \textit{Short description and list of relevant validation groups}
+
+\textbf{Systematic uncertainty estimation:}
+list of relevant systematic uncertainty estimation procedures; bracketing curves (energy dependence...) 
+
+\textbf{Update frequency and averaging:}
+e.g., averaging over time, or assume that all elements are the same, etc
+
+\textbf{Data source:}
+ACE, laboratory, etc. (needed)?
+
+\textbf{Notes:}
+ any further description / notes required
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Site Parameters}
+
+\subsubsection{Molecular profiles}
 
 \textbf{MC model parameter: atmospheric profile}
 
 \textbf{Description: }
 Atmospheric model profiles with molecular density, atmospheric thickness, and index of refraction as function of altitude.
-\TODO{understand if this would be same table for a curved atmosphere}
 
 \textbf{Format and units:}
 
-The following columns are required:
+Table format with the following columns:
+
 \begin{itemize}
-\item \textbf{altitude} in range [0 km, 120 km]
+\item altitude: (unit: km) physical altitude above sea level in the range [0, 120] km; step size of 1 km in the altitude range [0,30] km, steps of 2 km for [30,50] km, steps of 5 km above.
 
-\item \textbf{density}
+\item density: (unit g/cm$^3$) atmospheric density
 
-\item \textbf{index of refraction} calculated at at fixed wavelength of XXX nm
+\item index of refraction: (unit: none) index of refraction calculated at at fixed wavelength (typically at 400 nm)
 
 \end{itemize}
 
-detailed description of the format and the units required
+\TODO{Further columns are usually given in the atmprof files: thickness, temperature, pressure, partival vapor pressure; check if they are needed}
+
+\TODO{Are altitude steps fixed?}
 
 \textbf{Required accuracy:}
 
 \textbf{Setting procedure:}
-Short description and list of relevant setting / derivation groups
+Short description and list of relevant setting procedure
 
-\textbf{Validation:}
+\textbf{Setting groups:}
+
+\begin{enumerate}
+    \item \nameref{settingGroup:AtmosphericProperties}
+\end{enumerate}
+
+\textbf{Validation groups:}
+
+\begin{enumerate}
+    \item \nameref{validationGroup:ModelParameterComparison}
+    \begin{enumerate}
+         \item evaluate density vs altitude
+         \item evaluate of index of refraction vs altitude
+    \end{enumerate}
+    \item \nameref{validationGroup:ReferenceModelComparison}
+    \item \nameref{validationGroup:DataMonteCarloComparison}
+\end{enumerate}
+
 Short description and list of relevant validation groups 
 
 \textbf{Systematic uncertainty estimation:}
