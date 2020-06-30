@@ -1,46 +1,291 @@
-\section{Workflows for Model Parameter Validation}
+\section{Model Parameter Validation}
 
-\subsection{Cherenkov photon density}
+\subsection{Validation Groups}
 
-Cherenkov photon densities vs distance to shower core for different primary energies
+Changes in simulation model parameter trigger generally a set of validation workflows, which can be grouped in logical entities. The validation groups are:
 
-\subsection{Effective area calculator}
+\paragraph{Parameter comparison} \label{validationGroup:ModelParameterComparison}
+    \begin{enumerate}
+        \item \nameref{validation:ModelParameterPlotting}
+        \item \nameref{validation:StatisticalComparisonwithReferenceModel}
+        \item \dots
+    \end{enumerate}
+    
+\paragraph{Shower and Cherenkov emission characterization} \label{validationGroup:ReferenceModelComparison}
+    \begin{enumerate}
+        \item \nameref{validation:CherenkovPhotonLightPoolCharacterization}
+        \item \dots
+    \end{enumerate}
+    
+\paragraph{Data / Monte Carlo comparison} \label{validationGroup:DataMonteCarloComparison}
+    \begin{enumerate}
+        \item \nameref{validation:Brightnessofequidistantshowers}
+        \item \dots
+    \end{enumerate}
+
+\subsection{Template}
+
+\label{validation:Template}
+\textbf{Description:}
+
+\textbf{Primary Actors:}
+
+\textbf{Prerequisite:}
+
+\textbf{Main scenario:}
+
+\begin{enumerate}
+    \item \dots
+    \item \dots
+\end{enumerate}
+
+\textbf{Exception:}
+\begin{enumerate}
+    \item \dots
+    \item \dots
+\end{enumerate}
+
+\textbf{Success guarantee:}
+\begin{enumerate}
+    \item \dots
+    \item \dots
+\end{enumerate}
+
+\textbf{Minimal guarantee:}
+Log and error messages
+
+\textbf{Software components (examples):}
+\begin{enumerate}
+    \item \dots
+\end{enumerate}
+
+\textbf{Notes:}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Model Parameter Plotting}
+\label{validation:ModelParameterPlotting}
+\textbf{Description:}
+Plotting tool for visual inspection of a model parameter and its changes with respect to a reference model
+
+\textbf{Primary Actors:}
+
+\textbf{Prerequisite:}
+
+\textbf{Main scenario:}
+
+\begin{enumerate}
+    \item plot model parameters for given model and (optional) for reference model
+    \item (optional) plot comparison with reference model
+    \item (optional) plot difference to reference model (pending on parameter type, this can be a relative or absolute difference)
+\end{enumerate}
+
+\textbf{Exception:}
+\begin{enumerate}
+    \item unsuitable or invalid input model parameter
+    \item unsuitable or invalid reference model parameter
+\end{enumerate}
+
+\textbf{Success guarantee:}
+\begin{enumerate}
+    \item plots are provided (saved to a database, made available through a web interface)
+\end{enumerate}
+
+\textbf{Minimal guarantee:}
+Log and error messages
+
+\textbf{Software components (examples):}
+\begin{enumerate}
+    \item gammasims
+\end{enumerate}
+
+\textbf{Notes:}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Statistical Comparison with Reference Model}
+\label{validation:StatisticalComparisonwithReferenceModel}
+\textbf{Description:}
+Perform a statistical comparison of the model parameter values or the validation results (e.g., the distributions obtained in use case \nameref{validation:CherenkovPhotonLightPoolCharacterization}) with those obtained with another simulation model (e.g., the reference simulation model).
+
+\textbf{Primary Actors:}
+
+\textbf{Prerequisite:}
+
+\begin{enumerate}
+    \item values or distributions obtained for at least two simulation models 
+\end{enumerate}
+
+\textbf{Main scenario:}
+
+\begin{enumerate}
+    \item perform statistical comparisons
+    \begin{enumerate}
+        \item $\chi^2$ test
+        \item KS test
+        \item \dots
+    \end{enumerate}
+\end{enumerate}
+
+\textbf{Exception:}
+\begin{enumerate}
+    \item unsuitable or invalid input model parameter
+    \item unsuitable or invalid reference model parameter
+\end{enumerate}
+
+\textbf{Success guarantee:}
+\begin{enumerate}
+    \item statistical metric is provided (e.g., result of KS-Test from comparison of two histograms)
+\end{enumerate}
+
+\textbf{Minimal guarantee:}
+Log and error messages
+
+\textbf{Software components (examples):}
+\begin{enumerate}
+    \item gammasims
+\end{enumerate}
+
+\textbf{Notes:}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Cherenkov Photon Light Pool Characterization}
+\label{validation:CherenkovPhotonLightPoolCharacterization}
+\textbf{Description:}
+Simulate air showers for a given primary particle, Cherenkov emission, scattering and absorption for a given set of simulation configuration parameters (e.g., fixed set of primary energies).
+Characterize Cherenkov photon light pool (e.g., Cherenkov photon density vs distance to shower core position) and compare with outcome obtained with reference simulation model
+
+\textbf{Primary Actors:}
+
+\textbf{Prerequisite:}
+
+\textbf{Main scenario:}
+
+\begin{enumerate}
+    \item determine necessary number of events to be simulated for the required accuracy
+    \item prepare production configuration
+    \item generate the requested MC events
+    \item prepare distribution Cherenkov photon density vs distance to shower core position
+    \begin{enumerate}
+        \item apply use case \nameref{validation:ModelParameterPlotting}
+        \item apply use case \nameref{validation:StatisticalComparisonwithReferenceModel}
+    \end{enumerate}
+    \item prepare distribution  Cherenkov photon arrival times vs distance to shower core position 
+    \begin{enumerate}
+        \item apply use case \nameref{validation:ModelParameterPlotting}
+        \item apply use case \nameref{validation:StatisticalComparisonwithReferenceModel}
+    \end{enumerate}
+\end{enumerate}
+
+\textbf{Exception:}
+\begin{enumerate}
+    \item unsuitable or invalid input model parameter
+    \item unsuitable or invalid reference model parameter
+\end{enumerate}
+
+\textbf{Success guarantee:}
+\begin{enumerate}
+    \item plots are provided (saved to a database, made available through a web interface)
+\end{enumerate}
+
+\textbf{Minimal guarantee:}
+Log and error messages
+
+\textbf{Software components (examples):}
+\begin{enumerate}
+    \item CORSIKA
+    \item gammasims
+\end{enumerate}
+
+\textbf{Notes:}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Brightness of equidistant showers}
+\label{validation:Brightnessofequidistantshowers}
+\textbf{Description:}
+Compare brightness of equidistant showers seen by pairs of telescopes for current simulation model, reference simulation model, and results from measurements.
+
+\TODO{gamma ray or hadronic simulations?}
+
+\textbf{Primary Actors:}
+
+\textbf{Prerequisite:}
+
+\textbf{Main scenario:}
+
+\begin{enumerate}
+    \item prepare brightness distributions 
+    \begin{enumerate}
+        \item apply use case \nameref{validation:ModelParameterPlotting}
+        \item apply use case \nameref{validation:StatisticalComparisonwithReferenceModel}
+    \end{enumerate}
+\end{enumerate}
+
+\textbf{Exception:}
+\begin{enumerate}
+    \item unsuitable or invalid input model parameter
+    \item unsuitable or invalid reference model parameter
+\end{enumerate}
+
+\textbf{Success guarantee:}
+\begin{enumerate}
+    \item plots are provided (saved to a database, made available through a web interface)
+\end{enumerate}
+
+\textbf{Minimal guarantee:}
+Log and error messages
+
+\textbf{Software components (examples):}
+\begin{enumerate}
+    \item CORSIKA
+    \item \st
+    \item ctapipe
+    \item gammasims
+\end{enumerate}
+
+\textbf{Notes:}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{to be done...unsorted list}
+
+\subsubsection{Effective area calculator}
 
 Calculate effective areas for a given set of model parameters. Comparison to a reference set of simulations.
 
-\subsection{Atmospheric transmission comparison}
+\subsubsection{Atmospheric transmission comparison}
 
 Compare transmission probabilities as function of wavelengths for different emission heights.
 
-\subsection{Muon simulation and calibration (optical throughput and optical PSF)}
+\subsubsection{Muon simulation and calibration (optical throughput and optical PSF)}
 
 Simulation muons and run muon calibrator. Compare intensity distribution, camera pixel-wise intensity, optical PSF.
 
-\subsection{Precision optical simulation}
+\subsubsection{Precision optical simulation}
 
 Compare optical throughput between production simulation software and precision of optical simulations.
 Comparison should be performed at least as function of distance to the centre of the FOV.
 
 
-\subsection{Optical efficiency from external light source}
+\subsubsection{Optical efficiency from external light source}
 
 Simulation of external light source (illuminator), analysis, and calculation of optical throughput
 
-\subsection{Brightness of equidistant showers}
 
-Compare image brightness of simulated gamma-ray showers equidistant events seen by pairs of telescopes with a similar selection from data.
-\TODO{Simulate gamma rays or hadronic showers?}
-
-\subsection{Telescope trigger rates}
+\subsubsection{Telescope trigger rates}
 
 Comparison of telescope trigger rates between simulated events and data.
 
-\subsection{Gamma-ray point-spread function}
+\subsubsection{Gamma-ray point-spread function}
 
 Compare gamma-ray point-spread function with measurements obtained from the observation of strong gamma-ray sources.
 Take dependency on energy, offset in FOV, elevation, etc., into account.
 
-\subsection{Image parameter comparison}
+\subsubsection{Image parameter comparison}
 
 Compare image parameters obtained from simulated events with data:
 \begin{itemize}
@@ -48,7 +293,7 @@ Compare image parameters obtained from simulated events with data:
     \item hadronic events from 'empty field' observations with simulated hadronic events
 \end{itemize}
 
-\subsection{Relative cut efficiencies}
+\subsubsection{Relative cut efficiencies}
 
 Compare relative cut efficiencies between simulated events with a given simulation model and 
 \begin{itemize}
@@ -56,10 +301,10 @@ Compare relative cut efficiencies between simulated events with a given simulati
     \item events from strong gamma-ray emitters
 \end{itemize}
 
-\subsection{Trigger probabilities as function of telescopes}
+\subsubsection{Trigger probabilities as function of telescopes}
 
 Comparison of trigger probabilities of a third telescope compared to a given telescope pair as a function of distance for simulated hadronic events with data.
 
-\subsection{Validation under non-standard conditions}
+\subsubsection{Validation under non-standard conditions}
 
 Execute validation workflows for observations under non-standard conditions (e.g., high aerosol intrusion, partical cloud coverage)
