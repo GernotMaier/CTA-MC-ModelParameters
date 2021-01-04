@@ -2,8 +2,30 @@
 
 This document describes the CTA MC model parameters, the corresponding workflows for setting and validating them, and the procedures to calculate the corresponding systematic uncertainties.
 
-This document is part of a series describing the CTA MC Simulation Pipeline. 
+This document is part of a series describing the CTA MC Simulation Pipeline:
+
+\begin{itemize}
+    \item Concept for the CTA Simulation Pipelines System \cite{CTAConcept}
+    \item Simulation Model ParametersDescription and Workflows (this document)
+    \item Prototype implementations for the CTA Simulation Pipelines System
+    \item Data model and formats for the CTA Simulation Pipelines System 
+\end{itemize}
 It is expected that the reader is familiar with the wider concept of \simsys as described in  \cite{CTAConcept}.
+
+\textbf{Summary:}
+\begin{enumerate}
+    \item Simulation model parameters are described in the Section \textbf{\nameref{sect:ModelParameterDescription}} (Section \ref{sect:ModelParameterDescription}). 
+    This includes the parameter format and units, the required accuracy, parameter setting and validation procedures, and update frequencies.
+    
+    \item The Section \textbf{\nameref{sect:ModelParameterSetting}} (Section\ref{sect:ModelParameterSetting}) describes the groups of parameters which are set or derived simultaneously. Each model parameter is a member of at least one model parameter setting group.
+    
+    \item Each model parameter is part of at least one parameter validation group and is validated in at least one validation workflows as described in the section \textbf{\nameref{sect:ModelParameterValidation}} (Section \ref{sect:ModelParameterValidation}).
+    
+    \item  \textbf{\nameref{sect:Systematics}} (Section \ref{sect:Systematics}) allow to derive for each parameter contributing to the systematic uncertainties this quantity on a regular basis.
+    
+    \item The workflows described above require different \textbf{\nameref{sect:SimulationTypes}} (Section \ref{sect:SimulationTypes})
+    
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
